@@ -161,7 +161,26 @@ public class ListProduct {
             BufferedWriter writer = new BufferedWriter(new FileWriter("OutputSp.txt"));
             for(int i=0; i<ts.length;i++){
                 if(ts[i] instanceof DongHo ){
+                    DongHo dh = (DongHo) ts[i];
                     writer.write("0\n");
+                    writer.write(ts[i].getMasp()+"\n");
+                    writer.write(ts[i].getTenSp()+"\n");
+                    writer.write(ts[i].getSoluong()+"\n");
+                    writer.write(ts[i].getDonGia()+"\n");
+                    writer.write(ts[i].getChatLieu()+"\n");
+                    writer.write(dh.getThuongHieu()+"\n");
+                    writer.write(dh.getLoaiMay()+"\n");
+                }
+                else{
+                    DayChuyen dc = (DayChuyen) ts[i];
+                    writer.write("0\n");
+                    writer.write(ts[i].getMasp()+"\n");
+                    writer.write(ts[i].getTenSp()+"\n");
+                    writer.write(ts[i].getSoluong()+"\n");
+                    writer.write(ts[i].getDonGia()+"\n");
+                    writer.write(ts[i].getChatLieu()+"\n");
+                    writer.write(dc.getKichThuoc()+"\n");
+                    writer.write(dc.gethatDinh()+"\n");
                 }
             }
             writer.close();
