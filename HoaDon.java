@@ -83,7 +83,7 @@ public class HoaDon {
 	public void Xuat_Thong_Tin_Hoa_Don_Vao_File() { /// chỗ này xuất vào file liệu có hợp lý không ta?
 		
 		try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("OutputSp.txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("HoaDon.txt"));
             for(int i=0;i<n;i++){
 				writer.write("Ma Hoa Don:"+ChiTietHoaDons[i].getMaHD()+"\n");
 				writer.write("Ma San Pham:" + ChiTietHoaDons[i].getMaSP() +"\n");

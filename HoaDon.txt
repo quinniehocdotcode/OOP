@@ -1,0 +1,13 @@
+Ma Hoa Don:HDK
+Ma San Pham:HJVTT01
+Ten San Pham:Dong Ho PNG
+Don Gia:20000
+So Luong:7
+Thanh Tien:140000
+Ma Hoa Don:DDK
+Ma San Pham:HJVTT01
+Ten San Pham:Dong Ho PNG
+Don Gia:20000
+So Luong:2
+Thanh Tien:40000
+Tong Tien:40000

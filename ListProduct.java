@@ -159,8 +159,11 @@ public class ListProduct {
     public void XuatHoaDon(){
             try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("OutputSp.txt"));
-            writer.write("Dữ liệu ghi vào tệp văn bản" + 12);
-            writer.write(80);
+            for(int i=0; i<ts.length;i++){
+                if(ts[i] instanceof DongHo ){
+                    writer.write("0\n");
+                }
+            }
             writer.close();
             System.out.println("Ghi thành công vào tệp.");
         } catch (IOException e) {
