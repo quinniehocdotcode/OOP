@@ -6,7 +6,7 @@ public class Main {
         hd.them_chi_tiet_hd();
         hd.Them_hoa_don();
         hd.Xuat_Thong_Tin_Hoa_Don_Vao_File();
-    //ListProduct product =new ListProduct();
+    ListProduct product =new ListProduct();
     // Scanner sc = new Scanner(System.in);
     // ChiTietHoaDon cthd = new ChiTietHoaDon();
     // cthd.Nhap_chi_tiet_hoa_don();
