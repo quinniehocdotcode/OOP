@@ -7,6 +7,7 @@ public class Main {
         hd.Them_hoa_don();
         hd.Xuat_Thong_Tin_Hoa_Don_Vao_File();
     ListProduct product =new ListProduct();
+        // QUí cute test git
     // Scanner sc = new Scanner(System.in);
     // ChiTietHoaDon cthd = new ChiTietHoaDon();
     // cthd.Nhap_chi_tiet_hoa_don();
