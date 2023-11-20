@@ -13,6 +13,11 @@ public class DayChuyen extends SanPham {
         this.kichthuoc = kichthuoc;
         this.hatDinh = hatDinh;
     }
+    //abstract
+    @Override public  void thongTin(){
+        System.out.println("Toi la day chuyen!!");
+    }
+    //
     @Override public void nhapByKeyboard(){
         super.nhapByKeyboard();
         System.out.print("Kích Thước: ");

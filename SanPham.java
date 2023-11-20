@@ -2,7 +2,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-public class SanPham {
+public abstract class SanPham {
     Scanner sc = new Scanner(System.in);
     private String masp;
     private String tensp;
@@ -35,6 +35,9 @@ public class SanPham {
         System.out.println("Nhap chat lieu: ");
         this.chatlieu = sc.nextLine().replaceAll("\n", "");
     }
+    // abstract
+    public abstract void thongTin();
+    ////
     public void xuat(){
         System.out.println("Ma sp:"+this.masp);
         System.out.println("Ten sp:"+this.tensp);

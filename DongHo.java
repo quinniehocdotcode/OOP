@@ -12,6 +12,10 @@ public class DongHo extends SanPham{
         this.loaimay = loaimay;
         this.thuonghieu = thuonghieu;
     }
+    //// abstract
+    @Override public  void thongTin(){
+        System.out.println("Toi la dong ho!!");
+    }
     /// Ham Nhap
     @Override public void nhapByKeyboard(){
         super.nhapByKeyboard();
