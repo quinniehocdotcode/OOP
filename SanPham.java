@@ -65,6 +65,6 @@ public abstract class SanPham {
     ///// All nhan gia tri thay doi
     public void setSoLuong(int n){
         this.soluong = n + this.soluong;
-
     }
+    
 }

@@ -9,7 +9,9 @@ import java.util.Scanner;
 
 public class ListProduct {
     private  SanPham ts[] = new SanPham[6];
+    //interface;
     ChucNang method = new FindProduct();
+    //
     Scanner sc = new Scanner(System.in);
     public void Menu(){
         System.out.println("1: Xem");
@@ -67,58 +69,6 @@ public class ListProduct {
             System.out.println("Không tìm thấy tệp");
         }
     }
-    // public void NhapSP_1(){
-    //     int cnt=0;
-    //     int index=0;
-    //         String []str = new String[10];
-    //         File file = new File("text.txt");
-    //         if (!file.exists()) {
-    //                 System.out.println("File not found");
-    //                 return;
-    //         }
-
-    //         try {
-    //             Scanner scf = new Scanner(file);
-    //             while (scf.hasNextLine()) {
-    //             String check = scf.nextLine().trim();
-    //             System.out.println("Check:"+check+"->"+"index"+index);
-                
-    //             if(check.equals("0")){
-    //                 cnt = 0;
-                    
-
-    //                 while (scf.hasNextLine()) {
-    //                     if(cnt == 7){
-    //                         ts[index] = new DongHo(str[0], str[1], Integer.valueOf(str[2]), Integer.valueOf(str[3]), str[4], str[5], str[6]);
-    //                         break;  
-    //                     }
-    //                     else{
-    //                         str[cnt] = scf.nextLine().replaceAll("\n","");
-    //                             cnt++;
-    //                     }
-    //                 }
-    //             }
-    //             else if(check.equals("1")){   
-    //                 cnt = 0;
-    //                 while (scf.hasNextLine()) {
-    //                     if(cnt == 7){
-    //                         ts[index] = new DayChuyen(str[0], str[1], Integer.valueOf(str[2]), Integer.valueOf(str[3]), str[4],Integer.valueOf(str[5]), str[6]);
-    //                         break; //// ham break;
-    //                     }
-    //                     else{
-    //                         str[cnt] = scf.nextLine().replaceAll("\n","");
-    //                             cnt++;
-    //                     }
-    //                 } 
-
-    //             }
-    //             index++;
-    //             }
-    //             scf.close();
-    //         } catch (FileNotFoundException e) {
-    //             System.out.println("Error opening file");
-    //             }
-    //     }
     public void NhapSP_KeyBoard(){
         for(int i=0;i<ts.length;i++){
             System.out.println("0: Nhap Dong Ho.\n1: Nhap Day truyen.");
@@ -156,7 +106,7 @@ public class ListProduct {
                 ts[ts.length-1].nhapByKeyboard();
             }
     }  
-    public void XuatHoaDon(){
+    public void XuatSanPham(){
             try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("OutputSp.txt"));
             for(int i=0; i<ts.length;i++){
@@ -244,12 +194,14 @@ public class ListProduct {
         System.out.println("SoLuong:\t\t"+sl[0]+"\t\t"+sl[1]+"\t\t"+sl[2]+"\t\t"+sl[3]);
 
     }
+    // interface
     public void FindByMaSp(){
         method.FindByMaSp(ts);
     }
     public void FindByTen(){
         method.FindByTen(ts);
     }
+    //
     public int getDonGia(int vitri){
         return ts[vitri].getDonGia();
     }
