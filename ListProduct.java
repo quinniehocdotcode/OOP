@@ -13,12 +13,6 @@ public class ListProduct {
     ChucNang method = new FindProduct();
     //
     Scanner sc = new Scanner(System.in);
-    public void Menu(){
-        System.out.println("1: Xem");
-        System.out.println("2: Them 1sp");
-        System.out.println("3: Xuat Hoa Don");
-        System.out.println("4: Thoat");
-    }
     public void NhapSP_1() {
         int index = 0;
         try {
@@ -220,6 +214,15 @@ public class ListProduct {
     }
     public String getTenSp(int vitri){
         return ts[vitri].getTenSp();
+    }
+    public void Menu(){ // khi goi Menu thi sp tu load len, 
+        System.out.println("1. Nhap San Pham Tu Ban Phim");
+        System.out.println("2. Nhap San Pham Tu File");
+        System.out.println("3. Xoa San Pham");
+        System.out.println("4. Xuat San Pham");
+        System.out.println("5. Them mot san pham");
+        System.out.println("6. Xuat toan bo san pham vao file(OutputSp.txt)");
+        System.out.println("0. Thoat");
     }
 }       
 

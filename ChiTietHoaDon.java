@@ -13,7 +13,7 @@ public class ChiTietHoaDon  {
 	private int thanhTien = this.soLuong * this.donGia;
 	Scanner sc = new Scanner(System.in);
 	//constructor
-	public ChiTietHoaDon() {}
+	public ChiTietHoaDon(){}
 	public ChiTietHoaDon(String maHD, String maSP, int soLuong, int donGia) {
 		this.maHD = maHD;
 		this.maSP = maSP;
@@ -23,7 +23,7 @@ public class ChiTietHoaDon  {
 	//
 	int vitri = 0;
 	public void Nhap_chi_tiet_hoa_don() {
-		product.NhapSP_1();
+		product.NhapSP_1(); //// doc file
 		 vitri = product.Check("HJVTT01");
 		//System.out.println("Nhập mã sản phẩm ca mua: "); //
 		 // check ma de tro ve vi tri no trong mang sp=> lay dc so tien, 
@@ -32,14 +32,11 @@ public class ChiTietHoaDon  {
 		this.maHD = sc.nextLine();
 		System.out.print("Nhập số lượng: ");
 		setSoLuong(sc.nextInt());
-		//sc.nextLine();
-		//System.out.println("Nhập đơn giá: ");
 		setDonGia(product.getDonGia(vitri));
-		//sc.nextLine();
 		this.thanhTien = this.donGia * this.soLuong;
 	}
 // 
-	public void xuat_display(){
+	public void xuat_ChiTietHoaDon(){
 		System.out.println("Ma Hoa Don:"+this.maHD);
 		System.out.println("Ma San Pham:"+this.maSP);
 		System.out.println("So Luong:"+this.soLuong);
@@ -47,39 +44,6 @@ public class ChiTietHoaDon  {
 		System.out.println("Thanh Tien:"+this.thanhTien);
 
 }
-// 
-	// public void Xuat_Thong_Tin_CT_Hoa_Don(HoaDon hd) {
-	// hd.Xuat_Thong_Tin_Hoa_Don();
-	// System.out.println("Mã sản phẩm: " + this.maSP);
-	// System.out.println("Số lượng: " + this.soLuong);
-	// System.out.println("Đơn giá: " + this.donGia + "đ");
-	// System.out.println("Thành tiền: " + this.thanhTien + "đ");
-	// }
-	
-	// public void Xuat_ttct_vao_file(HoaDon hd) {
-	// 	try {
-	// 		PrintWriter pw = new PrintWriter("OutputSp.txt");
-	// 		pw.println("Mã hóa đơn: " + hd.getMaHD());
-	// 		pw.println("Mã khách hàng: " + hd.getMaKH());
-	// 		pw.println("Mã nhân viên: " + hd.getMaNV());
-	// 		pw.println("Ngày: " + hd.getNgay()  + "/" + hd.getThang() + "/" + hd.getNam() );
-	// 		pw.println("Thời gian: " + hd.getGio()+ " giờ: " + hd.getPhut() + " phút");
-	// 		pw.println("Mã sản phẩm: " + this.maSP);
-	// 		pw.println("Số lượng: " + this.soLuong);
-	// 		pw.println("Đơn giá: " + this.donGia + "đ");
-	// 		pw.println("Thành tiền: " + this.thanhTien + "đ");
-	// 		pw.println("----------------------------------\n\n");
-	// 		pw.flush();
-	// 	} catch (FileNotFoundException e) {
-	// 		e.printStackTrace();
-	// 	}
-		// } catch (UnsupportedEncodingException e) {
-		// 	e.printStackTrace();
-		// }
-	//}
-	//
-	
-	
 	public String getMaHD() {
 		return maHD;
 	}
@@ -114,6 +78,4 @@ public class ChiTietHoaDon  {
 	public void setThanhTien(int thanhTien) {
 		this.thanhTien = thanhTien;
 	}
-
-	
 }

@@ -1,13 +1,13 @@
-Ma Hoa Don:HDK
+Ma Hoa Don:123
 Ma San Pham:HJVTT01
 Ten San Pham:Dong Ho PNG
 Don Gia:20000
-So Luong:7
-Thanh Tien:140000
-Ma Hoa Don:DDK
+So Luong:3
+Thanh Tien:60000
+Ma Hoa Don:1456
 Ma San Pham:HJVTT01
 Ten San Pham:Dong Ho PNG
 Don Gia:20000
 So Luong:2
 Thanh Tien:40000
-Tong Tien:40000
+Tong Tien:100000

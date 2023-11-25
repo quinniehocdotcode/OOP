@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 public class HoaDon {
 	private ChiTietHoaDon []ChiTietHoaDons = new ChiTietHoaDon[100];
 	private String maHD;
-	private String maNV;;
+	private String maNV;
 	private String maKH;
 	private int tongTien;
 	private int gio;
@@ -72,7 +72,7 @@ public class HoaDon {
 	public void Xuat_Thong_Tin_Hoa_Don() { /// chỗ này xuất vào file liệu có hợp lý.
 		System.out.println("Xuat Hoa Don:");
 		for(int i = 0; i < n; i++ ){
-			ChiTietHoaDons[i].xuat_display();
+			ChiTietHoaDons[i].xuat_ChiTietHoaDon();
 		}
 		System.out.println("Mã hóa đơn: " + this.maHD);
 		System.out.println("Mã khách hàng: " + this.maKH);
