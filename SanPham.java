@@ -31,7 +31,8 @@ public abstract class SanPham {
         System.out.println("Nhap so luong san phan: ");
         this.soluong = sc.nextInt();
         System.out.println("Nhap donn gia: ");
-        this.dongia = sc.nextInt();    
+        this.dongia = sc.nextInt();  
+        sc.nextLine();  
         System.out.println("Nhap chat lieu: ");
         this.chatlieu = sc.nextLine().replaceAll("\n", "");
     }

@@ -14,15 +14,14 @@ public class Main {
             case 2: product.NhapSP_1(); System.out.println("Nhap san pham tu file thanh cong!"); break;
             case 3:  System.out.println("Xoa san pham thanh cong!"); break; /// Chua lam ham xoa
             case 4: product.XuatSP(); System.out.println("Xuat san pham thanh cong!"); break;
-            case 5: product.Them1Sp() ; System.out.println("Them mot san pham thanh cong");
-            case 6: break;/// chua lam 
-            default :
+            case 5: product.Them1Sp() ; System.out.println("Them mot san pham thanh cong"); break;
+            case 6: product.XuatSanPham(); break;
             }
         
         }
         
     }
-    public static void Menu_Thai(){
+    public static void Menu_Tuan(){
         ListProduct product =new ListProduct();
         product.NhapSP_1(); 
         product.XuatSP();
@@ -36,15 +35,24 @@ public class Main {
     public static void Menu_Chinh(){
         int index =1;
         while(index != 0){
-            Menu_Qui();
-            Menu_Thai();
-            Menu_Nhan();
-            Menu_So();
+            System.out.println("1. Menu_Qui");
+            System.out.println("2. Menu_Tuan");
+            System.out.println("3. Menu_Nhan");
+            System.out.println("4. Menu_So");
+            System.out.print("Chon Menu:");
+            index = sc.nextInt();
+            switch (index) {
+                case 1:Menu_Qui(); break;
+                case 2:Menu_Tuan(); break;
+                case 3:Menu_Nhan(); break;
+                case 4:Menu_So(); break;
+                default:
+            }    
         }
         
     }
     public static void main(String []args){
-        /// 0: là đồng hồ 1: day chuyen
+        /// 1: là đồng hồ 0: day chuyen
         Menu_Chinh();
         
     }

@@ -22,6 +22,7 @@ public class DayChuyen extends SanPham {
         super.nhapByKeyboard();
         System.out.print("Kích Thước: ");
         this.kichthuoc = sc.nextFloat();
+        sc.nextLine();
         System.out.print("Hạt Đính: ");
         this.hatDinh =  sc.nextLine();   
     }

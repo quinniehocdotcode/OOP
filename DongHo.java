@@ -19,15 +19,15 @@ public class DongHo extends SanPham{
     /// Ham Nhap
     @Override public void nhapByKeyboard(){
         super.nhapByKeyboard();
-        System.out.println("Thuong hieu: ");
+        System.out.print("Thuong hieu: ");
         this.thuonghieu = sc.nextLine();
         System.out.print("Loai may: ");
         this.loaimay = sc.nextLine();
     }
     @Override public void xuat(){
         super.xuat();
-        System.out.println("Thuong hieu: " + this.thuonghieu);
-        System.out.println("Loai may: "+ this.loaimay);
+        System.out.print("Thuong hieu: " + this.thuonghieu);
+        System.out.print("Loai may: "+ this.loaimay);
     }
     ////  Ham get
     public String getThuongHieu(){

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class ListProduct {
-    private  SanPham ts[] = new SanPham[6];
+    private  SanPham ts[];
     //interface;
     ChucNang method = new FindProduct();
     //
@@ -18,7 +18,7 @@ public class ListProduct {
         try {
             File file = new File("FileSp.txt");
             Scanner scanner = new Scanner(file);
-    
+            ts = new SanPham[Integer.parseInt(scanner.nextLine())];
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine().trim();
     
@@ -64,10 +64,12 @@ public class ListProduct {
         }
     }
     public void NhapSP_KeyBoard(){
+        System.out.print("Nhap so luong san pham: ");
+            ts = new SanPham[sc.nextInt()];
         for(int i=0;i<ts.length;i++){
             System.out.println("0: Nhap Dong Ho.\n1: Nhap Day truyen.");
             int n = sc.nextInt();
-            if(n == 1){
+            if(n == 0){
                 ts[i] = new DongHo();
                 ts[i].nhapByKeyboard();
             }
