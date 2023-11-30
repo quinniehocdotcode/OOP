@@ -52,7 +52,7 @@ public class Main {
         
     }
     public static void main(String []args){
-        /// 1: là đồng hồ 0: day chuyen
+        /// 0: là đồng ; 1: day chuyen
         Menu_Chinh();
         
     }
