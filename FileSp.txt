@@ -1,57 +1,15 @@
-7
-0
-SP001
-Dong Ho
-11
-20000
-Bac
-May Co
-Rolex
-1
-SP002
-MIN GOP KAKA
-20
-98000
-Bac
-50
-Kim Cuong
-0
-SP003
-GOP AAG GUN
-20
-270000
-Crom
-Pin
-Chanel
-1
-SP004
-GOP AAG GUN
-20
-20000
-Crom
-7
-Da Saphi
-0
-SP005
-GOP AAG GUN
-20
-200000
-Crom-Niken
-Rolex
-Pin
-0
-SP006
-Dong Ho PNG
-11
-20000
-Bac
-Rolex
-Pin
-1
-SP007
-MIN GOP KAKA
-20
-98000
-Bac
-50
-Kim Cuong
+002, Dong Ho B, 8, 15000, Vang, Casio, Quartz
+004, Dong Ho D, 15, 25000, Vang, Seiko, Quartz
+006, Dong Ho F, 10, 19000, Den, Tissot, Quartz
+008, Dong Ho H, 12, 27000, Vang, Citizen, Quartz
+010, Dong Ho J, 11, 20003, Bac, Rolex, May Cu
+012, Dong Ho L, 5, 18000, Den, Omega, Da
+014, Dong Ho N, 7, 22000, Bac, Tag Heuer, Rolex
+001, Day Truyen A, 11, 20000, Bac, 15, May Co
+003, Day Truyen C, 5, 18000, Den, 20, Da
+005, Day Truyen E, 7, 22000, Bac, 15, Kim Loai
+007, Day Truyen G, 9, 23000, Bac, 12, Da
+009, Day Truyen I, 6, 21000, Den, 18, Kim Loai
+011, Day Truyen K, 8, 15000, Vang, 2, Quartz
+013, Day Truyen M, 15, 25000, Vang, 7, Quartz
+015, Day Truyen O, 10, 19000, Den, 8, Quartz

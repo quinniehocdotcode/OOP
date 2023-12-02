@@ -1,158 +1,268 @@
-
-import java.io.PrintWriter;
 import java.util.Scanner;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 
 public class HoaDon {
-	private ChiTietHoaDon []ChiTietHoaDons = new ChiTietHoaDon[100];
-	private String maHD;
-	private String maNV;
-	private String maKH;
-	private int tongTien;
-	private int gio;
-	private int phut;
-	private int ngay;
-	private int thang;
-	private int nam;
-	private int n;
-	Scanner sc = new Scanner(System.in);
+    private String maHoaDon;
+    private String maKhachHang;
+    private String maNhanVien;
+    private String ngayLap;
+    private String gioLap;
+    private int tongTien;
+    private ChiTietHoaDon[] chiTietHoaDonList;
+    private int soLuongChiTiet; // Số lượng chi tiết hóa đơn thực tế
+    private static final int MAX_CHI_TIET = 50; // Số lượng tối đa chi tiết hóa đơn
+    private ListProduct product = new ListProduct();
 
-	public HoaDon() {}
-	
-	public HoaDon(String maHD, String maNV, String maKH, int tongTien, int gio, int phut, int ngay, int thang,
-			int nam) {
-		this.maHD = maHD;
-		this.maNV = maNV;
-		this.maKH = maKH;
-		this.gio = gio;
-		this.phut = phut;
-		this.ngay = ngay;
-		this.thang = thang;
-		this.nam = nam;
-	}
-	
-	public void them_chi_tiet_hd(){
-		System.out.print("So luong chi tiet hoa don:");
-		n = sc.nextInt();
-		for(int i = 0; i < n; i++ ){
-			ChiTietHoaDons[i] = new ChiTietHoaDon();
-			ChiTietHoaDons[i].Nhap_chi_tiet_hoa_don();
-		}
-	}
-    void Them_hoa_don () { /// them thong tin vao hoa don
-		sc.nextLine();
-		System.out.print("Nhập mã hóa đơn: ");
-		setMaHD(sc.nextLine());
-		System.out.print("Nhập mã nhân viên: ");
-		setMaNV(sc.nextLine());
-		System.out.print("Nhập mã khách hàng: ");
-		setMaKH(sc.nextLine());
-		// System.out.println("Nhập ngày: ");
-		// setNgay(sc.nextInt());
-		// sc.nextLine();
-		// System.out.println("Nhập tháng: ");
-		// setThang(sc.nextInt());
-		// sc.nextLine();
-		// System.out.println("Nhập năm: ");    // comment để đỡ nhập nhiều.
-		// setNam(sc.nextInt());
-		// sc.nextLine();
-		// System.out.println("Nhập giờ: ");
-		// setGio(sc.nextInt());
-		// sc.nextLine();	
-		// System.out.println("Nhập phút: ");
-		// setPhut(sc.nextInt());
-		// sc.nextLine();
-	}
-	
-	public void Xuat_Thong_Tin_Hoa_Don() { /// chỗ này xuất vào file liệu có hợp lý.
-		System.out.println("Xuat Hoa Don:");
-		for(int i = 0; i < n; i++ ){
-			ChiTietHoaDons[i].xuat_ChiTietHoaDon();
-		}
-		System.out.println("Mã hóa đơn: " + this.maHD);
-		System.out.println("Mã khách hàng: " + this.maKH);
-		System.out.println("Mã nhân viên: " + this.maNV);
-		// System.out.println("Ngày: " + this.ngay  + "/" + this.thang + "/" + this.nam );
-		// System.out.println("Thời gian: " + this.gio+ " giờ : " + this.phut + " phút");
-	}
-	public void Xuat_Thong_Tin_Hoa_Don_Vao_File() { /// chỗ này xuất vào file liệu có hợp lý không ta?
-		
-		try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("HoaDon.txt"));
-            for(int i=0;i<n;i++){
-				writer.write("Ma Hoa Don:"+ChiTietHoaDons[i].getMaHD()+"\n");
-				writer.write("Ma San Pham:" + ChiTietHoaDons[i].getMaSP() +"\n");
-				writer.write("Ten San Pham:" + ChiTietHoaDons[i].getTenSp() +"\n");
-				writer.write("Don Gia:" + ChiTietHoaDons[i].getDonGia() +"\n");
-				writer.write("So Luong:" + ChiTietHoaDons[i].getSoLuong() +"\n");
-				writer.write("Thanh Tien:" + ChiTietHoaDons[i].getThanhTien()+"\n");
-			}
-			writer.write("Tong Tien:"+tongTien()); //nay la tong cua nhieu thanh tien cua 1 chi tiet hoa don.
-            writer.close();
-            System.out.println("Ghi thành công vào tệp.");
-        } catch (IOException e) {
-            System.out.println("Đã xảy ra lỗi khi ghi vào tệp: " + e.getMessage());
+    public HoaDon() {
+        this.chiTietHoaDonList = new ChiTietHoaDon[MAX_CHI_TIET];
+        this.soLuongChiTiet = 0;
+    }
+
+    public HoaDon(String maHoaDon, String maKhachHang, String maNhanVien, String ngayLap, String gioLap) {
+        this.maHoaDon = maHoaDon;
+        this.maKhachHang = maKhachHang;
+        this.maNhanVien = maNhanVien;
+        this.ngayLap = ngayLap;
+        this.gioLap = gioLap;
+        this.chiTietHoaDonList = new ChiTietHoaDon[MAX_CHI_TIET];
+        this.soLuongChiTiet = 0;
+    }
+
+    // Getters and setters
+    
+    public String getMaHoaDon() {
+        return maHoaDon;
+    }
+
+    public void setMaHoaDon(String maHoaDon) {
+        this.maHoaDon = maHoaDon;
+    }
+
+    public String getMaKhachHang() {
+        return maKhachHang;
+    }
+
+    public void setMaKhachHang(String maKhachHang) {
+        this.maKhachHang = maKhachHang;
+    }
+
+    public String getMaNhanVien() {
+        return maNhanVien;
+    }
+
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
+    }
+
+    public String getNgayLap() {
+        return ngayLap;
+    }
+
+    public void setNgayLap(String ngayLap) {
+        this.ngayLap = ngayLap;
+    }
+
+    public String getGioLap() {
+        return gioLap;
+    }
+
+    public void setGioLap(String gioLap) {
+        this.gioLap = gioLap;
+    }
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
+
+    
+    public void nhapThongTinHoaDon() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Nhap ma hoa don: ");
+        this.maHoaDon = scanner.nextLine();
+
+        System.out.print("Nhap ma khach hang: ");
+        this.maKhachHang = scanner.nextLine();
+
+        System.out.print("Nhap ma nhan vien: ");
+        this.maNhanVien = scanner.nextLine();
+
+        System.out.print("Nhap ngay lap hoa don theo dinh dang ( ngay/thang/nam ): ");
+        this.ngayLap = scanner.nextLine();
+
+        System.out.print("Nhap gio lap hoa don theo dinh danh ( gio:phut ):  ");
+        this.gioLap = scanner.nextLine();
+
+        System.out.print("Nhap so luong chi tiet hoa don: ");
+        this.soLuongChiTiet = scanner.nextInt();
+        scanner.nextLine();
+
+        this.chiTietHoaDonList = new ChiTietHoaDon[MAX_CHI_TIET]; // tạo mảng lưu danh sách các chi tiết hóa đơn
+
+        for (int i = 0; i < soLuongChiTiet; i++) {
+            ChiTietHoaDon chiTiet = new ChiTietHoaDon();
+        int vitri =0;
+            System.out.println("Nhap chi tiet hoa don thu " + (i + 1) + ":");
+            System.out.print("Nhap ma san pham: ");
+            product.NhapSP_1(); //// doc file
+		    vitri = product.Check(scanner.nextLine());
+		    //System.out.println("Nhập mã sản phẩm can mua: "); //
+		    // check ma de tro ve vi tri no trong mang sp=> lay dc so tien, 
+		    chiTiet.setMaSanPham(product.getMaSp(vitri));
+            chiTiet.setDonGia(product.getDonGia(vitri));
+
+            System.out.print("Nhap so luong: ");
+            chiTiet.setSoLuong(scanner.nextInt());
+            scanner.nextLine();
+
+            //System.out.print("Nhập đơn giá: ");   // tự get từ mã sản phẩm từ danh sách sản phẩm, sửa sau
+            // chiTiet.setDonGia(scanner.nextInt());
+            //scanner.nextLine();
+
+            chiTiet.setThanhTien(chiTiet.getSoLuong() * chiTiet.getDonGia());
+
+            this.tongTien +=  chiTiet.getThanhTien();
+            this.chiTietHoaDonList[i] = chiTiet;
         }
-	}
-	public int tongTien(){ /// tinh tong tien cua hoa don
-		this.tongTien = 0;
-		for(int i=0;i<n;i++){
-			this.tongTien += ChiTietHoaDons[i].getThanhTien();
-		}
-		return this.tongTien;
-		
-	}
-	public String getMaHD() {
-		return maHD;
-	}
-	public void setMaHD(String maHD) {
-		this.maHD = maHD;
-	}
-	public String getMaNV() {
-		return maNV;
-	}
-	public void setMaNV(String maNV) {
-		this.maNV = maNV;
-	}
-	public String getMaKH() {
-		return maKH;
-	}
-	public void setMaKH(String maKH) {
-		this.maKH = maKH;
-	}
-	public int getGio() {
-		return gio;
-	}
-	public void setGio(int gio) {
-		this.gio = gio;
-	}
-	public int getPhut() {
-		return phut;
-	}
-	public void setPhut(int phut) {
-		this.phut = phut;
-	}
-	public int getNgay() {
-		return ngay;
-	}
-	public void setNgay(int ngay) {
-		this.ngay = ngay;
-	}
-	public int getThang() {
-		return thang;
-	}
-	public void setThang(int thang) {
-		this.thang = thang;
-	}
-	public int getNam() {
-		return nam;
-	}
-	public void setNam(int nam) {
-		this.nam = nam;
-	}
+    }
+
+    public void xuatThongTinHoaDon() {
+        System.out.println("Ma hoa don: " + this.maHoaDon);
+        System.out.println("Ma khach hang: " + this.maKhachHang);
+        System.out.println("Ma nhan vien: " + this.maNhanVien);
+        System.out.println("Ngay lap hoa don: " + this.ngayLap);
+        System.out.println("Gio lap hoa don: " + this.gioLap);
+        System.out.println("Tong tien: " + this.tongTien);
+
+        System.out.println("Chi tiet hoa don:");
+        for (int i = 0; i < soLuongChiTiet; i++) {
+            System.out.println("Chi tiet " + (i + 1) + ":");
+            System.out.println("  Ma san pham: " + chiTietHoaDonList[i].getMaSanPham());
+            System.out.println("  So luong: " + chiTietHoaDonList[i].getSoLuong());
+            System.out.println("  Don gia: " + chiTietHoaDonList[i].getDonGia());
+            System.out.println("  Thanh tien: " + chiTietHoaDonList[i].getThanhTien());
+        }
+    }
+    
+    
+    public void suaThongTinHoaDon() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Thong tin hoa don:");
+        xuatThongTinHoaDon();
+
+        System.out.println("\nBan muon sua thong tin nao:");
+        System.out.println("1. Thong tin co ban cua hoa don");
+        System.out.println("2. Sua thong tin chi tiet hoa don");
+
+        int luaChon = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (luaChon) {
+            case 1:
+                suaThongTinChungHoaDon();
+                break;
+            case 2:
+                suaChiTietHoaDon();
+                break;
+            default:
+                System.out.println("Lua chon khong hop le.");
+                break;
+        }
+    }
+
+    private void suaThongTinChungHoaDon() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Nhap ma khach hang moi: ");
+        this.maKhachHang = scanner.nextLine();
+
+        System.out.println("Nhap ma nhan vien moi: ");
+        this.maNhanVien = scanner.nextLine();
+
+        System.out.println("Nhap ngay lap hoa don moi (ngay/thang/nam): ");
+        this.ngayLap = scanner.nextLine();
+
+        System.out.println("Nhap gio lap hoa don moi (gio:phut): ");
+        this.gioLap = scanner.nextLine();
+
+       // System.out.println("Nhập tổng tiền mới: ");
+        //this.tongTien = scanner.nextInt();//
+    }
+
+    private void suaChiTietHoaDon() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Chon so thu tu chi tiet hoa don muon sua:");
+        int soThuTu = scanner.nextInt();
+        scanner.nextLine();
+
+        if (soThuTu <= soLuongChiTiet && soThuTu > 0) {
+            ChiTietHoaDon chiTiet = chiTietHoaDonList[soThuTu - 1];
+
+            System.out.println("Nhap ma san pham moi: ");
+            chiTiet.setMaSanPham(scanner.nextLine());
+
+            System.out.println("Nhap so luong moi: ");
+            chiTiet.setSoLuong(scanner.nextInt());
+            scanner.nextLine();
+
+            System.out.println("Nhap don gia moi: ");
+            chiTiet.setDonGia(scanner.nextInt());
+            scanner.nextLine();
+
+            chiTiet.setThanhTien(chiTiet.getSoLuong() * chiTiet.getDonGia());
+        } else {
+            System.out.println("So thu tu khong hop le.");
+        }
+    }
+
+    
+    /*
+    private void xuatChiTietHoaDon() {
+        System.out.println("Chi tiết hóa đơn:");
+        for (int i = 0; i < soLuongChiTiet; i++) {
+            System.out.println((i + 1) + ". Mã sản phẩm: " + chiTietHoaDonList[i].getMaSanPham()
+                    + ", Số lượng: " + chiTietHoaDonList[i].getSoLuong()
+                    + ", Đơn giá: " + chiTietHoaDonList[i].getDonGia());
+        }
+    }
+    */
+
+    
+// DELETE
+    
+    
+    //LƯU THÔNG TIN HÓA ĐƠN & CHI TIẾT HÓA ĐƠN VÀO FILE
+    public void luuThongTinHoaDonVaoFile(String tenFile) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(tenFile, true))) {
+            writer.write("Ma hoa don: " + this.maHoaDon + "\n");
+            writer.write("Ma khach hang: " + this.maKhachHang + "\n");
+            writer.write("Ma nhan vien: " + this.maNhanVien + "\n");
+            writer.write("Ngay lap hoa don: " + this.ngayLap + "\n");
+            writer.write("Gio lap hoa don: " + this.gioLap + "\n");
+            writer.write("Tong tien: " + this.tongTien + "\n");
+
+            writer.write("Chi tiet hoa don:\n");
+            for (int i = 0; i < soLuongChiTiet; i++) {
+                ChiTietHoaDon chiTiet = chiTietHoaDonList[i];
+                writer.write("Ma san pham: " + chiTiet.getMaSanPham() + "\n");
+                writer.write("So luong: " + chiTiet.getSoLuong() + "\n");
+                writer.write("Don gia: " + chiTiet.getDonGia() + "\n");
+                writer.write("Thanh tien: " + chiTiet.getThanhTien() + "\n");
+            }
+            writer.write("\n");
+        } catch (IOException e) {
+            System.out.println("Loi khi ghi vao file: " + e.getMessage());
+        }
+    }
+   
 }
+    
+

@@ -1,67 +1,35 @@
 //package FileJava.DoAnMyPham;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class ListProduct {
     private  SanPham ts[];
-    //interface;
-    ChucNang method = new FindProduct();
-    //
     Scanner sc = new Scanner(System.in);
     public void NhapSP_1() {
-        int index = 0;
-        try {
-            File file = new File("FileSp.txt");
-            Scanner scanner = new Scanner(file);
-            ts = new SanPham[Integer.parseInt(scanner.nextLine())];
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-    
-                if (line.equals("0")) {
-                    // Đọc thông tin về đồng hồ
-                    String maSp = scanner.nextLine();
-                    String tenSp = scanner.nextLine();
-                    int soLuong = Integer.parseInt(scanner.nextLine());
-                    int giaBan = Integer.parseInt(scanner.nextLine());
-                    String mauSac = scanner.nextLine();
-                    String chatLieu = scanner.nextLine();
-                    String thuongHieu = scanner.nextLine();
-    
-                    // Tạo đối tượng DongHo
-                    DongHo dongHo = new DongHo(maSp, tenSp, soLuong, giaBan, mauSac, chatLieu, thuongHieu);
-    
-                    // Sử dụng đối tượng DongHo theo nhu cầu của bạn (ví dụ: lưu vào mảng ts[])
-                     ts[index] = dongHo;
-                     index++;
-    
-                } else if (line.equals("1")) {
-                    // Đọc thông tin về dây chuyền
-                    String maSp = scanner.nextLine();
-                    String tenSp = scanner.nextLine();
-                    int soLuong = Integer.parseInt(scanner.nextLine());
-                    int giaBan = Integer.parseInt(scanner.nextLine());
-                    String chatLieu = scanner.nextLine();
-                    int doDai = Integer.parseInt(scanner.nextLine());
-                    String thuongHieu = scanner.nextLine();
-    
-                    // Tạo đối tượng DayChuyen
-                    DayChuyen dayChuyen = new DayChuyen(maSp, tenSp, soLuong, giaBan, chatLieu, doDai, thuongHieu);
-    
-                    // Sử dụng đối tượng DayChuyen theo nhu cầu của bạn (ví dụ: lưu vào mảng ts[])
-                     ts[index] = dayChuyen;
-                     index++;
+         ts = new SanPham[0];
+         String fileName = "FileSp.txt";
+         String line ;
+         try {
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
+           while((line = reader.readLine())!=null){
+               String []data = line.split(", ");
+                System.out.println(data[1].indexOf("Ho"));
+               if(data[1].indexOf("Ho")!=-1){
+                   DongHo  donghomoi =   new DongHo(data[0], data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), data[4], data[5], data[6]);
+                        ts = Arrays.copyOf(ts, ts.length+1);
+                        ts[ts.length-1] = (DongHo)donghomoi ;
+
                 }
+                 else{
+                    ts = Arrays.copyOf(ts, ts.length+1);
+                    ts[ts.length-1] =  new DayChuyen(data[0], data[1], Integer.parseInt(data[2]), Integer.parseInt(data[3]), data[4], Integer.parseInt(data[5]), data[6]);
             }
-    
-            scanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Không tìm thấy tệp");
-        }
+           }
+            reader.close();    
+         } catch (IOException e) {
+            // TODO: handle exception
+         }       
+          
     }
     public void NhapSP_KeyBoard(){
         System.out.print("Nhap so luong san pham: ");
@@ -108,25 +76,15 @@ public class ListProduct {
             for(int i=0; i<ts.length;i++){
                 if(ts[i] instanceof DongHo ){
                     DongHo dh = (DongHo) ts[i];
-                    writer.write("0\n");
-                    writer.write(ts[i].getMasp()+"\n");
-                    writer.write(ts[i].getTenSp()+"\n");
-                    writer.write(ts[i].getSoluong()+"\n");
-                    writer.write(ts[i].getDonGia()+"\n");
-                    writer.write(ts[i].getChatLieu()+"\n");
-                    writer.write(dh.getThuongHieu()+"\n");
-                    writer.write(dh.getLoaiMay()+"\n");
+                    writer.write(ts[i].getMasp()+", "+ts[i].getTenSp()+", "+ts[i].getSoluong()+", "
+                    +ts[i].getDonGia()+", "+ts[i].getChatLieu()+", "+dh.getThuongHieu()+", "+dh.getLoaiMay());
+                    writer.newLine();
                 }
                 else{
                     DayChuyen dc = (DayChuyen) ts[i];
-                    writer.write("0\n");
-                    writer.write(ts[i].getMasp()+"\n");
-                    writer.write(ts[i].getTenSp()+"\n");
-                    writer.write(ts[i].getSoluong()+"\n");
-                    writer.write(ts[i].getDonGia()+"\n");
-                    writer.write(ts[i].getChatLieu()+"\n");
-                    writer.write(dc.getKichThuoc()+"\n");
-                    writer.write(dc.gethatDinh()+"\n");
+                    writer.write(ts[i].getMasp()+", "+ts[i].getTenSp()+", "+ts[i].getSoluong()+", "
+                    +ts[i].getDonGia()+", "+ts[i].getChatLieu()+", "+dc.getKichThuoc()+", "+dc.gethatDinh());
+                    writer.newLine();
                 }
             }
             writer.close();
@@ -136,35 +94,7 @@ public class ListProduct {
         }
 
     } 
-    // public void FindByMaSp() {
-    //     System.out.print("Nhap ma sp can tim kiem:");
-    //     int Flag = 0;
-    //     String ma =  sc.nextLine().replaceAll("\n", "");
-    //     for(int i=0 ; i<ts.length; i++){ /// Tim bang ma chi co the ra mot sp or khong co cai nao
-    //          if(ma.equals(ts[i].getMasp())){
-    //             System.out.println("Tim Thay san pham!");
-    //             System.out.println("Thong tin san pham:");
-    //             ts[i].xuat();
-    //             Flag = 1; 
-    //             break;
-    //         }
-    //     }
-    //     if(Flag == 0)
-    //         System.out.println("Khong tim Thay san pham!");
-    // }
-    // public void FindByName(){
-    //     System.out.print("Nhap ten SP muon tim:");
-    //     String name = sc.nextLine().toLowerCase();
-    //    int Flag = 0;
-    //     for(int i=0;i<ts.length;i++){
-    //          System.out.println(ts[i].getTenSp().toLowerCase());
-    //         if(ts[i].getTenSp().toLowerCase().indexOf(name) != -1){
-    //             ts[i].xuat();
-    //             Flag = 1;
-    //         }
-    //         if(Flag == 0) System.out.println("Khong Tim Thay!");
-    //     }
-    // }
+    
     public void thongKeTheoGia(){
         int sl[] = new int[4];
         for(int i=0;i<4;i++){
@@ -190,13 +120,7 @@ public class ListProduct {
         System.out.println("SoLuong:\t\t"+sl[0]+"\t\t"+sl[1]+"\t\t"+sl[2]+"\t\t"+sl[3]);
 
     }
-    // interface
-    public void FindByMaSp(){
-        method.FindByMaSp(ts);
-    }
-    public void FindByTen(){
-        method.FindByTen(ts);
-    }
+
     //
     public int getDonGia(int vitri){
         return ts[vitri].getDonGia();

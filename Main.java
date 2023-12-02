@@ -53,7 +53,10 @@ public class Main {
     }
     public static void main(String []args){
         /// 0: là đồng ; 1: day chuyen
-        Menu_Chinh();
+        // Menu_Chinh();
+        ListProduct pr =  new ListProduct();
+        pr.NhapSP_1();
+        pr.XuatSanPham();
         
     }
     
